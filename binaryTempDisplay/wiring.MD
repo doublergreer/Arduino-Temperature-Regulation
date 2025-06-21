@@ -1,6 +1,6 @@
 ## Temperature-to-Binary LED Display (Arduino Uno)
 
-Reads temperature from an analog sensor (TMP36) connected to `A0`, converts it to Celsius, and displays the value modulo 32 in binary using a 5 bit LED readout.
+Reads temperature from an analog sensor (TMP36) connected to `A0`, converts it to Celsius, and displays temperatures up to 31 celsius in binary using a 5 bit LED readout.
 
 ### Hardware & Pinout
 
