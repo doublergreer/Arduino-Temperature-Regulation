@@ -35,7 +35,7 @@ const String clearRow = "                ";
 
 int temp, pollCount = 0;
 unsigned short int dailyTemps[96]; //poll every 15 minutes for 24 hrs
-float lastAvg;
+float avg;
 
 void setup() {
   lcd.begin(16, 2);
@@ -66,19 +66,15 @@ void loop() {
       lcd.print("F");
       slideIndex++;
     } else if (slideIndex == 1) {
-      lcd.print("Daily Avg: ");
+      lcd.print("24H Avg: ");
       if (pollCount > 0) {
-        int avg = calculateAvg();
         lcd.print(avg, 1);
         lcd.print((char)223);
         lcd.print("F");
-        lcd.write(avg >= lastAvg ? (uint8_t)0 : (uint8_t)1);
-        lastAvg = avg;
+        lcd.write(degreesF >= avg ? (uint8_t)0 : (uint8_t)1);
       } else {
         lcd.print("N/A");
       }
-      lcd.print((char)223);
-      lcd.print("F");
       slideIndex++;
     } else if (slideIndex == 2) {
       lcd.print("Uptime: ");
@@ -92,9 +88,10 @@ void loop() {
   }
   //log every 15 mins
   if (millis() - lastLogPoll >= 900000) {
-    if (pollCount < 1) lastAvg = dailyTemps[pollCount];
     dailyTemps[pollCount] = (int) degreesF * 10; //typecast w/ 1 decimal precision
     pollCount++;
+    lastLogPoll = millis();
+    avg = calculateAvg();
   }
 }
 
