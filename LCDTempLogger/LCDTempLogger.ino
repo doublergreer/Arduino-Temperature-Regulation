@@ -88,6 +88,7 @@ void loop() {
   }
   //log every 15 mins
   if (millis() - lastLogPoll >= 900000) {
+    if (pollCount > 95) pollCount = 0; //reset after 24 hrs
     dailyTemps[pollCount] = (int) degreesF * 10; //typecast w/ 1 decimal precision
     pollCount++;
     lastLogPoll = millis();
