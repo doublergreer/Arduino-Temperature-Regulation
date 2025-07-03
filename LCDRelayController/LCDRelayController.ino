@@ -52,7 +52,7 @@ void setup() {
 
   pinMode(relayPin, OUTPUT);
   digitalWrite(relayPin, LOW);
-  targetTemp = 75;
+  targetTemp = 73;
 }
 
 void loop() {
@@ -132,7 +132,7 @@ void runHeatingCycle() {
   delay(1000);
   if (degreesF < targetTemp) {
     digitalWrite(relayPin, HIGH);
-    delay(20000);
+    delay(10000);
   }
 }
 
